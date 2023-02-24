@@ -26,7 +26,7 @@ contract ERC20 is IERC20 {
         balances[msg.sender] += 36500 ether;
         totalSupply_ += 36500 ether;
         emit Transfer(address(0), msg.sender, 36500 ether);
-        lastCall = block.timestamp / 86400;
+        lastCall = block.timestamp / 3600;
         constructed = true;
     }
     function totalSupply() public view override returns (uint256) {
@@ -178,29 +178,27 @@ contract ERC20 is IERC20 {
         bool finished;
         uint256 postId;
     }
-    mapping(uint256 => mapping(address => bool)) votedYes;
-    mapping(uint256 => address[]) voters;
-    mapping(uint256 => address[]) payoutReceivers;
-    mapping(uint256 => mapping(bool => address[])) payouts;
+    mapping(uint256 => mapping(address => bool)) public votedYes;
+    mapping(uint256 => address[]) public voters;
+    mapping(uint256 => address[]) public payoutReceivers;
+    mapping(uint256 => mapping(bool => address[])) public payouts;
     Proposal[] public proposals;
     mapping(uint256 => mapping(address => bool)) voted;
-    uint256[] unfinishedProposals;
     function newProposal(string memory _desc, uint256 postId) lockedValue() public payable returns (Proposal memory) {
         require(msg.value == 1000000000000000000);
         require(posts[postId].harmful == 0 /*undecided post status*/);
         totalAmountLocked[msg.sender] += 1 ether; //Add 1 ftm locked
         voters[proposals.length].push(msg.sender);
         votedYes[proposals.length][msg.sender] = true;
-        unfinishedProposals.push(proposals.length);
         voted[proposals.length][msg.sender] = true;
-        proposals.push(Proposal(msg.sender,proposals.length,(block.timestamp + 24 hours),_desc,false,postId));
+        proposals.push(Proposal(msg.sender,proposals.length,(block.timestamp + 1 hours),_desc,false,postId));
         posts[postId].harmful = 1; //status being decided
         return (proposals[proposals.length - 1]);
     }
     function vote(bool support, uint256 id) lockedValue() public payable {
-        require(msg.value == 1000000000000000000, "1"); //has value to lock
-        require(voted[id][msg.sender] != true, "2"); //not voted yet
-        require(proposals[id].finished == false, "4"); //proposal is not ended
+        require(msg.value == 1000000000000000000); //has value to lock
+        require(voted[id][msg.sender] != true); //not voted yet
+        require(proposals[id].finished == false); //proposal is not ended
         voted[id][msg.sender] = true;
 
         if (proposals[id].deadline <= block.timestamp) {
@@ -220,7 +218,7 @@ contract ERC20 is IERC20 {
                     yesVotes++;
                     yesTokens += balances[voters[id][i]];
                     //UNLOCKED ETHER
-                    require(totalAmountLocked[voters[id][i]] >= 1 ether, "5");
+                    require(totalAmountLocked[voters[id][i]] >= 1 ether);
                     totalAmountLocked[voters[id][i]] -= 1 ether;
                     payable(voters[id][i]).transfer(1 ether);
                 } else {
@@ -228,7 +226,7 @@ contract ERC20 is IERC20 {
                     noVotes++;
                     noTokens += balances[voters[id][i]];
                     //UNLOCKED ETHER
-                    require(totalAmountLocked[voters[id][i]] >= 1 ether, "6");
+                    require(totalAmountLocked[voters[id][i]] >= 1 ether);
                     totalAmountLocked[voters[id][i]] -= 1 ether;
                     payable(voters[id][i]).transfer(1 ether);
                 }
@@ -236,14 +234,14 @@ contract ERC20 is IERC20 {
             uint yesPercent = (yesTokens/(noTokens + yesTokens))/2 + (yesVotes/(yesVotes+noVotes))/2;
             uint noPercent = (noTokens/(noTokens + yesTokens))/2 + (noVotes/(yesVotes+noVotes))/2;
             if (yesPercent >= noPercent) {
-                posts[proposals[id].id].harmful = 3; //bad post
+                posts[proposals[id].postId].harmful = 3; //bad post
                 for (uint a = 0; a < payouts[id][true].length; a++) {
-                    payoutReceivers[block.timestamp/86400].push(payouts[id][true][a]);
+                    payoutReceivers[block.timestamp/3600].push(payouts[id][true][a]);
                 }
             } else  {
-                posts[proposals[id].id].harmful = 2; //good post
+                posts[proposals[id].postId].harmful = 2; //good post
                 for (uint a = 0; a < payouts[id][false].length; a++) {
-                    payoutReceivers[block.timestamp/86400].push(payouts[id][true][a]);
+                    payoutReceivers[block.timestamp/3600].push(payouts[id][true][a]);
                 }
             }
         } else {
@@ -254,16 +252,20 @@ contract ERC20 is IERC20 {
         }
     }
     function distribute() external {
-        require(lastCall < block.timestamp/86400, "10");
-        for (uint i = lastCall; i < block.timestamp/86400; i++) {
-            uint256 rewards = 0;
-            for (uint a = 0; a < payoutReceivers[i].length; a++) {
-                totalSupply_ += uint256(1000000000000000000)/uint256(payoutReceivers[i].length);
-                balances[payoutReceivers[i][a]] += uint256(1000000000000000000)/uint256(payoutReceivers[i].length);
-                rewards += uint256(1000000000000000000)/uint256(payoutReceivers[i].length);
+        require(lastCall < block.timestamp/3600, "10");
+        for (uint i = lastCall; i < block.timestamp/3600; i++) {
+            if (payoutReceivers[i].length == 0) {
+                totalSupply_ += 1 ether;
+                balances[address(0x0)] += 1 ether;
+            } else {
+                totalSupply_ += 1 ether;
+                for (uint256 a = 0; a < payoutReceivers[i].length; a++) {
+                    balances[payoutReceivers[i][a]] += 1 ether/payoutReceivers[i].length;
+                }
+                balances[address(0x0)] += 1 ether - (1 ether/payoutReceivers[i].length)*payoutReceivers[i].length;
             }
-            balances[0xB9Ac5fee09095db3bF3C282E2f3bcc0572EC13a9] += 1000000000000000000 - rewards;
         }
+        lastCall = (block.timestamp/3600);
     }
 
     function getProposals() public view returns (Proposal[] memory) {
