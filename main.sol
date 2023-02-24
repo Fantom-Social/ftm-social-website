@@ -26,7 +26,7 @@ contract ERC20 is IERC20 {
         balances[msg.sender] += 36500 ether;
         totalSupply_ += 36500 ether;
         emit Transfer(address(0), msg.sender, 36500 ether);
-        lastCall = block.timestamp / 84600;
+        lastCall = block.timestamp / 86400;
         constructed = true;
     }
     function totalSupply() public view override returns (uint256) {
@@ -152,7 +152,7 @@ contract ERC20 is IERC20 {
         profiles[msg.sender].name = _name;
     }
     function createPost(string calldata _content) external lockedValue() nonEmptyInput(_content) {
-        Post memory newPost = Post({author: msg.sender,content: _content,timeCreated: block.number,id: posts.length,harmful: 0});
+        Post memory newPost = Post({author: msg.sender,content: _content,timeCreated: block.number,id: posts.length,harmful: 0 /*undecided post status*/});
         posts.push(newPost);
     }
     function getPosts() external view returns (Post[] memory) {
@@ -187,23 +187,23 @@ contract ERC20 is IERC20 {
     uint256[] unfinishedProposals;
     function newProposal(string memory _desc, uint256 postId) lockedValue() public payable returns (Proposal memory) {
         require(msg.value == 1000000000000000000);
-        require(posts[postId].harmful == 0);
+        require(posts[postId].harmful == 0 /*undecided post status*/);
         totalAmountLocked[msg.sender] += 1 ether; //Add 1 ftm locked
         voters[proposals.length].push(msg.sender);
         votedYes[proposals.length][msg.sender] = true;
         unfinishedProposals.push(proposals.length);
         voted[proposals.length][msg.sender] = true;
         proposals.push(Proposal(msg.sender,proposals.length,(block.timestamp + 24 hours),_desc,false,postId));
-        posts[postId].harmful = 1;
+        posts[postId].harmful = 1; //status being decided
         return (proposals[proposals.length - 1]);
     }
     function vote(bool support, uint256 id) lockedValue() public payable {
-        require(msg.value == 1000000000000000000); //has value to lock
-        require(voted[id][msg.sender] != true); //not voted yet
-        require(proposals[id].finished == false); //proposal is not ended
+        require(msg.value == 1000000000000000000, "1"); //has value to lock
+        require(voted[id][msg.sender] != true, "2"); //not voted yet
+        require(proposals[id].finished == false, "4"); //proposal is not ended
         voted[id][msg.sender] = true;
 
-        if (proposals[id].deadline >= block.timestamp) {
+        if (proposals[id].deadline <= block.timestamp) {
             //Last vote
             totalAmountLocked[msg.sender] += 1 ether; //Add 1 ftm locked
         voters[id].push(msg.sender);
@@ -220,7 +220,7 @@ contract ERC20 is IERC20 {
                     yesVotes++;
                     yesTokens += balances[voters[id][i]];
                     //UNLOCKED ETHER
-                    require(totalAmountLocked[voters[id][i]] >= 1 ether);
+                    require(totalAmountLocked[voters[id][i]] >= 1 ether, "5");
                     totalAmountLocked[voters[id][i]] -= 1 ether;
                     payable(voters[id][i]).transfer(1 ether);
                 } else {
@@ -228,7 +228,7 @@ contract ERC20 is IERC20 {
                     noVotes++;
                     noTokens += balances[voters[id][i]];
                     //UNLOCKED ETHER
-                    require(totalAmountLocked[voters[id][i]] >= 1 ether);
+                    require(totalAmountLocked[voters[id][i]] >= 1 ether, "6");
                     totalAmountLocked[voters[id][i]] -= 1 ether;
                     payable(voters[id][i]).transfer(1 ether);
                 }
@@ -236,12 +236,12 @@ contract ERC20 is IERC20 {
             uint yesPercent = (yesTokens/(noTokens + yesTokens))/2 + (yesVotes/(yesVotes+noVotes))/2;
             uint noPercent = (noTokens/(noTokens + yesTokens))/2 + (noVotes/(yesVotes+noVotes))/2;
             if (yesPercent >= noPercent) {
-                posts[proposals[id].id].harmful = 3;
+                posts[proposals[id].id].harmful = 3; //bad post
                 for (uint a = 0; a < payouts[id][true].length; a++) {
                     payoutReceivers[block.timestamp/86400].push(payouts[id][true][a]);
                 }
             } else  {
-                posts[proposals[id].id].harmful = 2;
+                posts[proposals[id].id].harmful = 2; //good post
                 for (uint a = 0; a < payouts[id][false].length; a++) {
                     payoutReceivers[block.timestamp/86400].push(payouts[id][true][a]);
                 }
@@ -254,7 +254,7 @@ contract ERC20 is IERC20 {
         }
     }
     function distribute() external {
-        require(lastCall < block.timestamp/86400);
+        require(lastCall < block.timestamp/86400, "10");
         for (uint i = lastCall; i < block.timestamp/86400; i++) {
             uint256 rewards = 0;
             for (uint a = 0; a < payoutReceivers[i].length; a++) {
