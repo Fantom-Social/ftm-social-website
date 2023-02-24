@@ -303,4 +303,5 @@ a {
 .closeButton {
   margin: 0px 20px 0px 10px;
   font-size: 150%;
+  cursor: pointer;
 }

@@ -2,7 +2,7 @@ import {Component} from 'react';
 import contract from '../constants/ABI';
 import URL from '../constants/websiteURL';
 import rpc from '../constants/rpcUrl';
-import Navbar from '../navbar';
+import Navbar from '../misc/navbar';
 import contractAddress from '../constants/contractAddress';
 const { ethereum } = window;
 const Web3 = require('web3');

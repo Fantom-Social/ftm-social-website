@@ -2,11 +2,11 @@ import React from "react";
 import { Component } from "react";
 import Options from './options';
 import contract from "../constants/ABI";
-import Navbar from "../navbar";
+import Navbar from "../misc/navbar";
 import createFeedParams from './createFeedParams.js';
 import './options.css'
 import rpc from '../constants/rpcUrl.js'
-import reportPost from "../reportPost";
+import reportPost from "../misc/reportPost";
 const { ethereum } = window;
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
@@ -24,7 +24,6 @@ class Explore extends Component {
     contract.methods.getPosts().call().then((posts) => {
       console.log(posts)
       //quickly sort data from latest to oldest and filter all account wanted
-      console.log(params);
       const result = Object.values(posts).filter(item => (createFeedParams(params, item.author))).sort(function (a, b) { return b.id - a.id });
 console.log(result);
 this.setState({posts : result})

@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import Navbar from '../navbar';
+import Navbar from '../misc/navbar';
 import contract from '../constants/ABI';
+import follow from '../misc/follow/follow';
+import unfollow from '../misc/follow/unfollow';
 
 export default class ProfileComponent extends Component {
     constructor(props) {
@@ -35,6 +37,7 @@ export default class ProfileComponent extends Component {
                     <h1>{this.state.name}</h1>
                     <p className='profileAddress'>@{this.props.params.address}</p><br></br>
                     <p>Followers <b>{this.state.followers}</b> Following <b>{this.state.following}</b></p><br></br>
+                    <button onClick={()=>{follow(this.props.params.address)}}>Follow</button><button onClick={()=>{unfollow(this.props.params.address)}}>Unfollow</button>
                     <center><div className='linetwo'></div></center>
                     {this.state.posts.slice(0, this.state.rowsToDisplay).map((item, i) => <div key={i}>
                         <div>

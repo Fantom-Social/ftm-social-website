@@ -1,8 +1,7 @@
 import { Component } from 'react';
-import Navbar from '../navbar';
+import Navbar from '../misc/navbar';
 import rpc from '../constants/rpcUrl';
 import contractAddress from '../constants/contractAddress';
-import checkConnection from '../checkConnection';
 import contract from '../constants/ABI';
 import LockSelector from './lockDashboard';
 const Web3 = require('web3');

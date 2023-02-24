@@ -1,6 +1,6 @@
 import { Component } from "react";
 import contract from "../constants/ABI";
-import Navbar from "../navbar";
+import Navbar from "../misc/navbar";
 import contractAddress from "../constants/contractAddress";
 import rpc from "../constants/rpcUrl";
 const Web3 = require('web3');
@@ -16,34 +16,6 @@ export default class ProposalComponent extends Component {
         contract.methods.balanceOf("0x46451175070A75CfF85209A333368149DA85551b").call().then((data)=>console.log(data))
         this.state = {};
         this.getData();
-        ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
-            web3.eth.estimateGas({
-                to: contractAddress,
-                from: ethereum.selectedAddress,
-                value: 0,
-                data: contract.methods.execute().encodeABI()
-            })
-                .then((data) => {
-                    console.log('4')
-                    ethereum
-                    .request({
-                      method: 'eth_sendTransaction',
-                      params: [
-                        {
-                          from: accounts[0],
-                          to: contractAddress,
-                          value: 0,
-                          gasPrice: web3.eth.gasPrice,
-                          gas: '0x' + data,
-                          data: contract.methods.execute().encodeABI()
-                        },
-                      ],
-                    })
-                    .then((txHash) => alert('Confirmed: ' + txHash))
-                    .catch((error) => {console.log(error)});
-                })
-                .catch((error) => console.log(error))
-        })
         
     }
     getData() {
