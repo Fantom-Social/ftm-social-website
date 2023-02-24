@@ -65,8 +65,8 @@ contract ERC20 is IERC20 {
     }
     address[] internal addresses; //Social Media
     mapping(address => Profile) public profiles;
-    mapping(address => address[]) internal followers;
-    mapping(address => address[]) internal following;
+    mapping(address => address[]) public followers;
+    mapping(address => address[]) public following;
     mapping(address => mapping(address => Array)) internal checkfollowing;
     mapping(address => mapping(address => Array)) internal checkfollowers;
     Post[] internal posts;
@@ -101,7 +101,7 @@ contract ERC20 is IERC20 {
         _;
     }
     modifier lockedValue() {
-        require(locks[msg.sender].value == 1 ether, "3");
+        require(locks[msg.sender].value == 1 ether);
         _;
     }
     function getLock(address _address) public view returns(Lock memory) {
@@ -252,17 +252,19 @@ contract ERC20 is IERC20 {
         }
     }
     function distribute() external {
-        require(lastCall < block.timestamp/3600, "10");
+        require(lastCall < block.timestamp/3600);
         for (uint i = lastCall; i < block.timestamp/3600; i++) {
+            totalSupply_ += 1 ether;
             if (payoutReceivers[i].length == 0) {
-                totalSupply_ += 1 ether;
                 balances[address(0x0)] += 1 ether;
+                emit Transfer(address(0x0), address(0x0), 1 ether);
             } else {
-                totalSupply_ += 1 ether;
                 for (uint256 a = 0; a < payoutReceivers[i].length; a++) {
                     balances[payoutReceivers[i][a]] += 1 ether/payoutReceivers[i].length;
+                    emit Transfer(address(0x0), payoutReceivers[i][a], 1 ether/payoutReceivers[i].length);
                 }
                 balances[address(0x0)] += 1 ether - (1 ether/payoutReceivers[i].length)*payoutReceivers[i].length;
+                emit Transfer(address(0x0), address(0x0), 1 ether - (1 ether/payoutReceivers[i].length)*payoutReceivers[i].length);
             }
         }
         lastCall = (block.timestamp/3600);
