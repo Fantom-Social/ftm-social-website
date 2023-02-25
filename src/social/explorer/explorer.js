@@ -17,8 +17,10 @@ class Explore extends Component {
     super(props);
     this.state = { posts: [], rowsToDisplay: 10, custom: []};
     this.showMore = this.showMore.bind(this);
-    this.gatherData(this.state.custom);
-    contract.methods.lastCall().call().then((data) => {console.log(data)})
+    
+    contract.methods.getAddresses().call().then((addresses) => {
+      this.gatherData(addresses)
+    })
   }
   gatherData(params) {
     //call contract to access data
@@ -88,12 +90,12 @@ this.setState({posts : result})
     return (
         <div>
             <Navbar />
-      <div className='main'>
+      <div className='mainExplorer'>
         <h1 onClick={this.hide}>Explorer</h1>
         {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
               <div key={i}>
                 <br></br>
-                <p className='big'><a className='postAddress' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <p className='big'><a className='postAddress' href={URL + "app/profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
               </div>
@@ -106,10 +108,10 @@ this.setState({posts : result})
       <div className='optionsBox'>
                 <h2><strong>Options</strong></h2><br></br>
                 <div style={{whiteSpace: 'nowrap'}}>
-                <input type="radio" id="MyFeed" name="fav_language" value="MyFeed" defaultChecked  onChange={(e) => this.handleOnChange(e)}></input>
+                <input type="radio" id="MyFeed" name="fav_language" value="MyFeed"  onChange={(e) => this.handleOnChange(e)}></input>
   <label htmlFor="MyFeed"> My Feed</label><br></br>
   </div>
-  <input type="radio" id="Recommended" name="fav_language" value="Recommended"  onChange={(e) => this.handleOnChange(e)}></input>
+  <input type="radio" id="Recommended" name="fav_language" value="Recommended" defaultChecked onChange={(e) => this.handleOnChange(e)}></input>
   <label htmlFor="Recommended"> Recommended</label><br></br>
   <input type="radio" id="Other" name="fav_language" value="Other" onChange={(e) => this.handleOnChange(e)}></input>
   <label htmlFor="Other"> Other/Custom<br></br><input placeholder=" 0xA, 0xB, 0xC" className='otherInput' onChange={this.handleInput}></input></label>

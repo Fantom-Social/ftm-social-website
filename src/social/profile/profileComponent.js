@@ -39,14 +39,14 @@ export default class ProfileComponent extends Component {
                 <Navbar />
                 <div className='main'>
                     <h1>{this.state.name}</h1>
-                    <a className='profileAddress' href={URL + "profile/" + this.props.params.address}>@{this.props.params.address}</a><br></br>
+                    <a className='profileAddress' href={URL + "app/profile/" + this.props.params.address}>@{this.props.params.address}</a><br></br>
                     <p>Followers <b>{this.state.followers}</b> Following <b>{this.state.following}</b></p><br></br>
                     <button onClick={()=>{follow(this.props.params.address)}}>Follow</button><button onClick={()=>{unfollow(this.props.params.address)}}>Unfollow</button>
                     <Line />
                     {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
               <div key={i}>
                 <br></br>
-                <p className='big'><a className='postAddress' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <p className='big'><a className='postAddress' href={URL + "app/profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
               </div>

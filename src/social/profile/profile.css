@@ -1,5 +1,5 @@
 .main {
-    margin-left: 10%;
+    margin-left: 15%;
     padding: 20px;
 }
 p.big {
@@ -7,8 +7,4 @@ p.big {
   }
 .postAddress {
     opacity: 90%;
-  }
-  .profileAddress {
-    font-size: 150%;
-    text-decoration: none;
   }
