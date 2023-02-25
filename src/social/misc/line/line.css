@@ -1,0 +1,9 @@
+.line {
+    background-color: black;
+    opacity: 10%;
+    width: 100%;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+    border-radius: 180px;
+}

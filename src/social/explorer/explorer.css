@@ -1,0 +1,27 @@
+.main {
+    margin-left: 10%;
+    padding: 20px;
+    margin-right: 10%;
+  }
+p.big {
+    font-size: 115%;
+  }
+.postAddress {
+    opacity: 90%;
+  }
+  #mypopup {
+    display: none;
+  }
+  .optionsBox {
+    background-color: #3D3D68;
+    box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
+  
+    height: 100%;
+    margin-left: 80%;
+    width: 20%;
+    top: 0;
+    padding: 20px;
+    position: fixed;
+    overflow: auto;
+  
+  }

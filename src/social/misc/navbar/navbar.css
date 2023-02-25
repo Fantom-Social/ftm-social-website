@@ -1,0 +1,82 @@
+.navbar {
+    background-color: #3D3D68;
+    box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
+  
+    height: 100%;
+    margin: 0px;
+    width: 10%;
+    padding: 0px;
+    position: fixed;
+    overflow: auto;
+  }
+
+  button.connect {
+    background-color: #1969FF;
+    border: none;
+    padding: 5px;
+    margin: 30px 0px 8px 8px;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 20%) 0px -2px 0px inset;
+    overflow: hidden;
+    width: 80%;
+    }
+  .navbarLink {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .navbarLink:hover {
+    cursor: pointer;
+  }
+  .right {
+    margin-left: 25%;
+    margin-right: 25%;
+    width: 50%;
+    overflow: auto;
+    text-align: center;
+    position: absolute;
+    bottom: 45px;
+  }
+  .sendPost {
+    width: 40%;
+    height: 40vh;
+    background-color: #3D3D68;
+    position: absolute;
+    box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
+    border-radius: 10px;
+    top: 10%;
+    z-index: 10;
+    left: 35%;
+    margin-top: 0;
+  }
+  .closeButton {
+    margin: 0px 20px 0px 10px;
+    font-size: 150%;
+    cursor: pointer;
+  }
+  textarea.postText {
+    background-color: #3D3D68;
+    color: white;
+    width: 95%;
+    height: 30vh;
+    display: block;
+    border: none;
+    font-size: 120%;
+    margin-top: 5px;
+  }
+  .sendPostButton {
+    width: 100px;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #1969FF;
+    color: white;
+    box-shadow: rgb(0 0 0 / 20%) 0px -2px 0px inset;
+  }
+  ul #a {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 15%;
+    overflow: hidden;
+  }

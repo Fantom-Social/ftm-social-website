@@ -1,6 +1,6 @@
 body, textarea {
   margin: 0;
-  font-family: 'Segoe UI';
+  font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

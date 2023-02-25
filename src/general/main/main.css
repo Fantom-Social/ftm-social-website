@@ -1,0 +1,56 @@
+@media screen and (min-width: 576px) {
+.sectionOne {
+    max-width: 35%;
+}
+}
+@media screen and (max-width: 576px) {
+.sectionOne {
+    max-width: 80%;
+}
+}
+.sectionOne {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+.enterAppButton {
+    border: none;
+    padding: 10px;
+    font-size: 120%;
+    border:none;
+    background-color:  #1969ff;
+    border-radius: 45px;
+}
+button {
+    color: white;
+}
+.sectionTwo {
+    background-color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: #1969ff;
+}
+.sectionThree {
+    background-color: #f6f9fc;
+    color: #3d3d68;
+    display: inline-block;
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.column {
+    width: 21%;
+    padding: 2%;
+    float: left;
+    background-color: #f6f9fc;
+    color: #3d3d68;
+    display: inline-block;
+}
+.sectionFour {
+    background-color: #c2d1d9;    
+    display: block;
+    padding: 8px;
+}

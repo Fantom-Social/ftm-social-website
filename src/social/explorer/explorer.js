@@ -1,12 +1,13 @@
 import React from "react";
 import { Component } from "react";
-import Options from './options';
 import contract from "../constants/ABI";
-import Navbar from "../misc/navbar";
+import Navbar from "../misc/navbar/navbar";
 import createFeedParams from './createFeedParams.js';
 import './options.css'
 import rpc from '../constants/rpcUrl.js'
 import reportPost from "../misc/reportPost";
+import "./explorer.css";
+import Line from "../misc/line/line";
 const { ethereum } = window;
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
@@ -87,22 +88,22 @@ this.setState({posts : result})
     return (
         <div>
             <Navbar />
-      <div className='content explorercontent'>
+      <div className='main'>
         <h1 onClick={this.hide}>Explorer</h1>
         {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
               <div key={i}>
                 <br></br>
-                <p className='b'><b></b> <a className='address' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <p className='big'><a className='postAddress' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
               </div>
               <button onClick={() => reportPost(item.id)}>Report Post</button>
               <br></br>
-              <center><div className='linetwo'></div></center>
+              <Line /><br></br>
             </div>)}<br></br>
-            <a className="btn btn-primary" onClick={this.showMore}>Show More</a>
+            <a onClick={this.showMore}>Show More</a>
       </div>
-      <div className='new'>
+      <div className='optionsBox'>
                 <h2><strong>Options</strong></h2><br></br>
                 <div style={{whiteSpace: 'nowrap'}}>
                 <input type="radio" id="MyFeed" name="fav_language" value="MyFeed" defaultChecked  onChange={(e) => this.handleOnChange(e)}></input>

@@ -2,8 +2,9 @@ import {Component} from 'react';
 import contract from '../constants/ABI';
 import URL from '../constants/websiteURL';
 import rpc from '../constants/rpcUrl';
-import Navbar from '../misc/navbar';
+import Navbar from '../misc/navbar/navbar';
 import contractAddress from '../constants/contractAddress';
+import "./lock.css"
 const { ethereum } = window;
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
@@ -77,9 +78,9 @@ export default class LockSelector extends Component {
                                         },
                                     ],
                                 })
-                                .then((txHash) => console.log(txHash))
-                                .catch((error) => { console.log(error) });
-                        }).catch((error) => console.log(error))
+                                .then((txHash) => alert(txHash))
+                                .catch((error) => { alert(error) });
+                        }).catch((error) => alert(error))
                     });
                 }
 
@@ -168,7 +169,7 @@ export default class LockSelector extends Component {
         return(
             <div>
                 <Navbar />
-                <div className='content'>
+                <div className='main'>
                     <h1>Lock Dashboard</h1>
                     {this.state.dashboard}
                 </div>

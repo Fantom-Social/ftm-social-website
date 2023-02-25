@@ -6,12 +6,14 @@ import Profile from './social/profile/profile';
 import DAO from './social/dao/dao';
 import LockSelector from './social/lock/lockDashboard';
 import Proposal from './social/dao/proposal';
+import Main from './general/main/main';
 const LinkRoutes = () => {
     return (
         <div>
             <BrowserRouter basename={process.env.PUBLIC_URL}>
 
                 <Routes>
+                    <Route path="/" element={<Main />} />
                     <Route path="/app/explorer" element={<Explore/>} />
                     <Route path="/app/profile/:address" element={<Profile/>} />
                     <Route path="/app/lock" element={<LockSelector />} />

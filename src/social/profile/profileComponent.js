@@ -1,10 +1,12 @@
 import { Component } from 'react';
-import Navbar from '../misc/navbar';
+import Navbar from '../misc/navbar/navbar';
 import contract from '../constants/ABI';
 import follow from '../misc/follow/follow';
 import reportPost from '../misc/reportPost';
 import URL from '../constants/websiteURL';
+import "./profile.css";
 import unfollow from '../misc/follow/unfollow';
+import Line from '../misc/line/line';
 
 export default class ProfileComponent extends Component {
     constructor(props) {
@@ -35,22 +37,24 @@ export default class ProfileComponent extends Component {
         return (
             <div>
                 <Navbar />
-                <div className='content'>
+                <div className='main'>
                     <h1>{this.state.name}</h1>
                     <a className='profileAddress' href={URL + "profile/" + this.props.params.address}>@{this.props.params.address}</a><br></br>
                     <p>Followers <b>{this.state.followers}</b> Following <b>{this.state.following}</b></p><br></br>
                     <button onClick={()=>{follow(this.props.params.address)}}>Follow</button><button onClick={()=>{unfollow(this.props.params.address)}}>Unfollow</button>
-                    <center><div className='linetwo'></div></center>
-                    {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div key={i}>
+                    <Line />
+                    {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
+              <div key={i}>
                 <br></br>
-                <p className='b'><b></b> <a className='address' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <p className='big'><a className='postAddress' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
+              </div>
               <button onClick={() => reportPost(item.id)}>Report Post</button>
               <br></br>
-              <center><div className='linetwo'></div></center>
+              <Line /><br></br>
             </div>)}<br></br>
-                    <a className="btn btn-primary" onClick={this.showMore}>Show More</a>
+                    <a onClick={this.showMore}>Show More</a>
                 </div>
             </div>
         )

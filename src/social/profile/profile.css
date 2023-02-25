@@ -1,0 +1,14 @@
+.main {
+    margin-left: 10%;
+    padding: 20px;
+}
+p.big {
+    font-size: 115%;
+  }
+.postAddress {
+    opacity: 90%;
+  }
+  .profileAddress {
+    font-size: 150%;
+    text-decoration: none;
+  }
