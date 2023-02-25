@@ -14,7 +14,7 @@ const web3 = new Web3(rpc);
 class Explore extends Component {
   constructor(props) {
     super(props);
-    this.state = { posts: [], rowsToDisplay: 1, custom: []};
+    this.state = { posts: [], rowsToDisplay: 10, custom: []};
     this.showMore = this.showMore.bind(this);
     this.gatherData(this.state.custom);
     contract.methods.lastCall().call().then((data) => {console.log(data)})
@@ -39,7 +39,7 @@ this.setState({posts : result})
     }
 }
   showMore() {
-    this.setState({rowsToDisplay:this.state.rowsToDisplay + 1});
+    this.setState({rowsToDisplay:this.state.rowsToDisplay + 10});
   }
   handleOnChange(e) {
     console.log('selected option', e.target.value);
@@ -92,7 +92,7 @@ this.setState({posts : result})
         {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
               <div key={i}>
                 <br></br>
-                <p className='b'><b></b> <a className='address'>@{item.author}  · {item.timeCreated}</a></p>
+                <p className='b'><b></b> <a className='address' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
               </div>

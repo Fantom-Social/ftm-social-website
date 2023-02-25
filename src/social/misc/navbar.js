@@ -14,18 +14,6 @@ class Navbar extends Component {
         this.state = {connectedButtonStatus : "Connect", function : this.connectWallet}
         this.handleInput = this.handleInput.bind(this);
         this.sendPost = this.sendPost.bind(this);
-        if (window.ethereum && window.ethereum.isMetaMask) {
-            // metamask is installed
-        ethereum.request({ method: 'eth_accounts' }).then((data)=>{
-            if (data.length === 0) {
-                this.setState({connectedButtonStatus : 'Connect'})
-            } else {
-                this.setState({connectedButtonStatus:'Connected'})
-            }
-        })
-    } else {
-        alert("Please install metamask.")
-    }
     }
 
       directWindow() {
@@ -111,7 +99,10 @@ class Navbar extends Component {
                             },
                           ],
                         })
-                        .then((txHash) => alert('Confirmed: ' + txHash))
+                        .then((txHash) => {
+                            this.directWindow()
+                            alert('Confirmed: ' + txHash)
+                        })
                         .catch((error) => {console.log(error)});
                     })
                     .catch((error) => alert(error))

@@ -158,7 +158,7 @@ export default class LockSelector extends Component {
                         this.lockFTM();
                         
                     } else {
-                        this.setState({dashboard:<div><p><b>Your Lock Dashboard</b></p><p>Your lock of {lockdata.value} ends on {String(new Date(lockdata.end/1000))}</p><button onClick={this.unlockFTM}>Unlock</button></div>})
+                        this.setState({dashboard:<div><p><b>Your Lock Dashboard</b></p><p>Your lock of {lockdata.value} ends on {String(new Date(lockdata.end*1000))}</p><button onClick={this.unlockFTM}>Unlock</button></div>})
                     }
                 })
             }

@@ -2,12 +2,14 @@ import { Component } from 'react';
 import Navbar from '../misc/navbar';
 import contract from '../constants/ABI';
 import follow from '../misc/follow/follow';
+import reportPost from '../misc/reportPost';
+import URL from '../constants/websiteURL';
 import unfollow from '../misc/follow/unfollow';
 
 export default class ProfileComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = { posts: [], rowsToDisplay: 1 }
+        this.state = { posts: [], rowsToDisplay: 10 }
         this.showMore = this.showMore.bind(this);
         this.callData();
     }
@@ -27,7 +29,7 @@ export default class ProfileComponent extends Component {
         })
     }
     showMore() {
-        this.setState({rowsToDisplay:this.state.rowsToDisplay + 1});
+        this.setState({rowsToDisplay:this.state.rowsToDisplay + 10});
       }
     render() {
         return (
@@ -35,20 +37,19 @@ export default class ProfileComponent extends Component {
                 <Navbar />
                 <div className='content'>
                     <h1>{this.state.name}</h1>
-                    <p className='profileAddress'>@{this.props.params.address}</p><br></br>
+                    <a className='profileAddress' href={URL + "profile/" + this.props.params.address}>@{this.props.params.address}</a><br></br>
                     <p>Followers <b>{this.state.followers}</b> Following <b>{this.state.following}</b></p><br></br>
                     <button onClick={()=>{follow(this.props.params.address)}}>Follow</button><button onClick={()=>{unfollow(this.props.params.address)}}>Unfollow</button>
                     <center><div className='linetwo'></div></center>
-                    {this.state.posts.slice(0, this.state.rowsToDisplay).map((item, i) => <div key={i}>
-                        <div>
-                            <br></br>
-                            <p className='b'><b></b> <a className='address'>@{item.author}  · {item.timeCreated}</a></p>
-                            <br></br>
-                            <p>{item.content}</p>
-                        </div>
-                        <br></br>
-                        <center><div className='linetwo'></div></center>
-                    </div>)}<br></br>
+                    {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div key={i}>
+                <br></br>
+                <p className='b'><b></b> <a className='address' href={URL + "profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <br></br>
+                <p >{item.content}</p>
+              <button onClick={() => reportPost(item.id)}>Report Post</button>
+              <br></br>
+              <center><div className='linetwo'></div></center>
+            </div>)}<br></br>
                     <a className="btn btn-primary" onClick={this.showMore}>Show More</a>
                 </div>
             </div>
