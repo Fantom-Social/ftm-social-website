@@ -1,9 +1,9 @@
 import React from "react";
 import { Component } from "react";
-import contractAddress from '../../constants/contractAddress';
-import rpc from '../../constants/rpcUrl.js'
-import contract from '../../constants/ABI.js'
-import URL from "../../constants/websiteURL";
+import contractAddress from '../../../constants/contractAddress';
+import rpc from '../../../constants/rpcUrl.js'
+import contract from '../../../constants/ABI.js'
+import URL from "../../../constants/websiteURL";
 import "./navbar.css"
 const Web3 = require('web3');
 const web3 = new Web3(rpc);

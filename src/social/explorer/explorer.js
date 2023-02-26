@@ -1,13 +1,15 @@
 import React from "react";
 import { Component } from "react";
-import contract from "../constants/ABI";
+import contract from "../../constants/ABI";
 import Navbar from "../misc/navbar/navbar";
 import createFeedParams from './createFeedParams.js';
 import './options.css'
-import rpc from '../constants/rpcUrl.js'
+import rpc from '../../constants/rpcUrl.js'
 import reportPost from "../misc/reportPost";
 import "./explorer.css";
 import Line from "../misc/line/line";
+import follow from "../misc/follow/follow";
+import unfollow from "../misc/follow/unfollow";
 const { ethereum } = window;
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
@@ -96,16 +98,21 @@ this.setState({posts : result})
           <p><b>Access the world of blockchain.</b></p>
           </div>
         </div>
-        {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
-              <div key={i}>
-                <br></br>
+        {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div key={i} className="post">
+        <div class="dropdown">
+        <div className="menuDrop dropbtn"><center>…</center></div>
+  <div class="dropdown-content">
+    <a onClick={()=>{reportPost(item.id)}}>Report Post</a>
+    <a onClick={() => {follow(item.author)}}>Follow</a>
+    <a onClick={() => {unfollow(item.author)}}>Unfollow</a>
+  </div>
+</div>
                 <p className='big'><a className='postAddress' href={URL + "app/profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
                 <br></br>
                 <p >{item.content}</p>
-              </div>
-              <button onClick={() => reportPost(item.id)}>Report Post</button>
               <br></br>
-              <Line /><br></br>
+              <Line />
+              <br></br>
             </div>)}<br></br>
             <a onClick={this.showMore}>Show More</a>
       </div>

@@ -1,9 +1,9 @@
 import {Component} from 'react';
-import contract from '../constants/ABI';
-import URL from '../constants/websiteURL';
-import rpc from '../constants/rpcUrl';
+import contract from '../../constants/ABI';
+import URL from '../../constants/websiteURL';
+import rpc from '../../constants/rpcUrl';
 import Navbar from '../misc/navbar/navbar';
-import contractAddress from '../constants/contractAddress';
+import contractAddress from '../../constants/contractAddress';
 import "./lock.css"
 const { ethereum } = window;
 const Web3 = require('web3');
@@ -167,8 +167,9 @@ export default class LockSelector extends Component {
         </div>
                     <div className="dashboard">
                         <br></br>
-                        <p>Lock Value: {this.state.value / (10^18)}</p>
-                        <p>Lock End: {this.state.end}</p>
+                        <p>Lock Value: {this.state.value/(10**18)} FTM</p>
+                        <p>Lock End: {new Date(this.state.end * 1000).toLocaleString()}</p>
+                        <br></br>
                         <p><b>Actions</b></p>
                         <button className="lockbutton" onClick={()=> this.unlockFTM()}>Unlock</button><button className="lockbutton" onClick={()=>this.lockFTM()}>Lock</button>
 

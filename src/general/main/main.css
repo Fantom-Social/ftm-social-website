@@ -30,20 +30,25 @@ button {
     color: white;
 }
 .sectionTwo {
-    background-color: white;
     padding-left: 25px;
     padding-right: 25px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    background-color: white;
+    padding-top: 100px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 60px 36px -28px inset;
+    padding-bottom: 100px;
+    color: #425466;
+}
+.blueText {
     color: #1969ff;
+    display: inline-block;
 }
 .sectionThree {
     background-color: #f6f9fc;
     color: #3d3d68;
     display: inline-block;
     width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 .column {
     width: 21%;
@@ -54,11 +59,29 @@ button {
     display: inline-block;
 }
 .sectionFour {
-    background-color: #c2d1d9;    
+    background-color: #ffffff29;
     display: block;
     padding: 8px;
 }
 .sectionOneGradient {
     width: 100%;
-    background-image: linear-gradient(rgb(1, 1, 57),rgb(4, 4, 86));
+    background-image: linear-gradient(#1969ff,rgb(4, 4, 86));
+}
+.sectionFive {
+    padding-left: 25px;
+    padding-right: 25px;
+    background-image: linear-gradient(#00c8ffe7, blue);
+    padding-top: 50px;
+    padding-bottom: 59px;
+}
+.statistic {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px -3px 0px inset;
+    padding: 2.5%;
+    width: 35%;
+    color: rgba(174, 174, 174, 0.715);
+    
+    display: inline-block;
+    margin: 5%;
 }

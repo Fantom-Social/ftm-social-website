@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Explore from './social/explorer/explorer';
-import URL from './social/constants/websiteURL';
+import URL from './constants/websiteURL';
 import Profile from './social/profile/profile';
 import DAO from './social/dao/dao';
 import LockSelector from './social/lock/lockDashboard';

@@ -5,6 +5,8 @@
   }
 p.big {
     font-size: 115%;
+    overflow-wrap: break-word;
+    margin-right: 85px;
   }
 .postAddress {
     opacity: 90%;
@@ -34,4 +36,50 @@ p.big {
   }
   .headerText {
     padding: 20px;
+  }
+  .menuDrop {
+    top: 0px;
+    right: 5px;
+    position: absolute;
+  }
+  .post {
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+  }
+  .dropbtn {
+    background-color: #1969FF;
+    color: white;
+    height: 32px;
+    width: 32px;
+    border-radius: 100%;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown-content {
+    display: none;
+    background-color: #f1f1f1;
+    position: absolute;
+    cursor: pointer;
+    top: 35px;
+    right: 5px;
+    border-radius: 20px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown {
+    right: 0;
+    position: absolute;
+    z-index: 10;
+    height: 80px;
+    width: 85px;
   }

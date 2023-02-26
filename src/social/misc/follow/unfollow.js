@@ -1,7 +1,7 @@
-import rpc from "../../constants/rpcUrl";
-import chainId from "../../constants/chainId";
-import contractAddress from '../../constants/contractAddress';
-import contract from '../../constants/ABI.js'
+import rpc from "../../../constants/rpcUrl";
+import chainId from "../../../constants/chainId";
+import contractAddress from '../../../constants/contractAddress';
+import contract from '../../../constants/ABI.js'
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
 const { ethereum } = window;

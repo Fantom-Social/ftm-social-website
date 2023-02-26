@@ -1,8 +1,8 @@
 import { Component } from "react";
-import contract from "../constants/ABI";
+import contract from "../../constants/ABI";
 import Navbar from "../misc/navbar/navbar";
-import contractAddress from "../constants/contractAddress";
-import rpc from "../constants/rpcUrl";
+import contractAddress from "../../constants/contractAddress";
+import rpc from "../../constants/rpcUrl";
 import "./dao.css"
 const Web3 = require('web3');
 const web3 = new Web3(rpc);

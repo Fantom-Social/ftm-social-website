@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import contract from '../constants/ABI';
-import URL from '../constants/websiteURL';
+import contract from '../../constants/ABI';
+import URL from '../../constants/websiteURL';
 import Navbar from '../misc/navbar/navbar';
 import "./dao.css";
 import Line from '../misc/line/line';

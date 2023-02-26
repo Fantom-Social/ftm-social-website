@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import Navbar from '../misc/navbar/navbar';
-import contract from '../constants/ABI';
+import contract from '../../constants/ABI';
 import follow from '../misc/follow/follow';
 import reportPost from '../misc/reportPost';
-import URL from '../constants/websiteURL';
+import URL from '../../constants/websiteURL';
 import "./profile.css";
 import unfollow from '../misc/follow/unfollow';
 import Line from '../misc/line/line';
