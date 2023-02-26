@@ -117,12 +117,24 @@ class Navbar extends Component {
         return (
             <div>
                 <div className='navbar' id='a'>
-                    <button className='connect' onClick={this.state.function}>{this.state.connectedButtonStatus}</button>
+                    <center><button className='connect' onClick={this.state.function}>{this.state.connectedButtonStatus}</button></center>
                     <br></br>
-                    <center><a className='navbarLink' href={URL + 'app/lock'}>Lock</a></center><br></br>
-                    <center><a className='navbarLink' href={URL + 'app/explorer'}>Explore</a></center><br></br>
-                    <center><a className='navbarLink' onClick={this.directWindow}>Create</a></center><br></br>
-                    <center><a href={URL + 'app/dao'}><p className='right'>DAO</p></a></center>
+                    <div className="navbarElement">
+                        <img src="/assets/images/icons/vault.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                        <a className='navbarLink' href={URL + 'app/lock'}>&nbsp;&nbsp;Lock</a>
+                    </div>
+                    <div className="navbarElement">
+                    <img src="/assets/images/icons/telescope.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                    <a className='navbarLink' href={URL + 'app/explorer'}>&nbsp;&nbsp;Explore</a><br></br>
+                    </div>
+                    <div className="navbarElement">
+                    <img src="/assets/images/icons/pencil.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                    <a className='navbarLink' onClick={this.directWindow}>&nbsp;&nbsp;Create</a><br></br>
+                    </div>
+                    <div className="navbarElement">
+                    <img src="/assets/images/icons/ballot.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                    <a href={URL + 'app/dao'}><p className='navbarLink'>&nbsp;&nbsp;Governance</p></a>
+                    </div>
 
                 </div>
                 <div className='sendPost' id='mypopup'>

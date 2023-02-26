@@ -11,8 +11,8 @@ export default class DAO extends Component {
         this.state = { proposals: [], posts: [] };
         this.gatherData();
     }
-    isEnded(time) {
-        if (time < Math.round((new Date()).getTime() / 1000)) {
+    isEnded(status) {
+        if (status === true) {
             return 'Closed';
         } else {
             return 'Open';
@@ -24,9 +24,8 @@ export default class DAO extends Component {
             this.setState({ posts: data })
             console.log(data);
             contract.methods.getProposals().call().then((data) => {
-                let result = Object.values(data).filter(item => item.deadline > Math.round((new Date()).getTime() / 1000));
-                console.log(result);
-                this.setState({ proposals: result });
+                console.log(data)
+                this.setState({ proposals: data });
             })
         })
     }
@@ -38,7 +37,7 @@ export default class DAO extends Component {
                     <h1>DAO</h1>
                     <p>Vote and sumbit proposals to help keep the community safe and earn money.</p><br></br><br></br>
                     {(this.state.proposals).map((item, i) => <div key={i}>
-                        <h3><a href={URL + 'dao/proposals/' + item.id}>Proposal {item.id} - {this.isEnded(item.deadline)}</a></h3>
+                        <h3><a href={URL + 'dao/proposals/' + item.id}>Proposal {item.id} - {this.isEnded(item.finished)}</a></h3>
                         <p><i>"{(this.state.posts[item.postId]).content}"</i> was posted on block {(this.state.posts[item.id]).timeCreated}. This proposal will end on {String(new Date(item.deadline * 1000).toLocaleString())}.</p>
                         <br></br>
                         <Line />
