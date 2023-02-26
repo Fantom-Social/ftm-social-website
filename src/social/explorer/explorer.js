@@ -25,10 +25,8 @@ class Explore extends Component {
   gatherData(params) {
     //call contract to access data
     contract.methods.getPosts().call().then((posts) => {
-      console.log(posts)
       //quickly sort data from latest to oldest and filter all account wanted
       const result = Object.values(posts).filter(item => (createFeedParams(params, item.author))).sort(function (a, b) { return b.id - a.id });
-console.log(result);
 this.setState({posts : result})
     })
   }
@@ -50,24 +48,25 @@ this.setState({posts : result})
     if (e.target.value === 'Other') {
       this.gatherData(this.state.custom);
     } else {
-      if (e.target.value === 'MyFeed' || e.target.value === undefined) {
-        this.isConnected().then((data) => {
-          if (data == true) {
-            ethereum.request({ method: 'eth_accounts' }).then((addresses) => {
-              contract.methods.getFollowing(addresses[0]).call().then((following) => {
-                this.gatherData(following)
-              }).catch((error) => {
-                if (error == 'Error: Returned error: execution reverted: Profile does not exist.') {
-                  alert('You must preform an action on the site to look at your feed.')
+      if (e.target.value === 'MyFeed') {
+        ethereum.request({ method: 'eth_requestAccounts' }).then((accounts)=> {
+          if (accounts.length == 0) {
+              alert("Please connect your metamask wallet.")
+          } else  {
+            contract.methods.getFollowing(accounts[0]).call().then((following)=>{
+              this.gatherData(following);
+            }).catch((error)=>{
+
+              contract.methods.profiles(accounts[0]).call().then((profile)=>{
+                if (profile.owner != accounts[0]) {
+                  alert("You must have locked FTM at least once.")
                 } else {
-                  alert(error)
+                  alert("An unknown error occured. " + error)
                 }
               })
             })
-          } else {
-            alert('To view your feed please connect your wallet so we can identify you.')
           }
-        })
+        });
       } else {
         if (e.target.value === 'Recommended') {
           contract.methods.getAddresses().call().then((addresses) => {
@@ -81,7 +80,6 @@ this.setState({posts : result})
     let data = event.target.value
     data = data.split(',')
     this.setState({ custom: data });
-    console.log(this.state.selectedOption)
     if (this.state.selectedOption === 'Other') {
     this.gatherData(data)
     }
@@ -91,7 +89,13 @@ this.setState({posts : result})
         <div>
             <Navbar />
       <div className='mainExplorer'>
-        <h1 onClick={this.hide}>Explorer</h1>
+        <div className="topHeading">
+          <div className="headerText">
+          <h1>Explorer</h1>
+          <br></br>
+          <p><b>Access the world of blockchain.</b></p>
+          </div>
+        </div>
         {this.state.posts.slice(0,this.state.rowsToDisplay).map((item, i) => <div>
               <div key={i}>
                 <br></br>

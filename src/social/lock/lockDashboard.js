@@ -12,11 +12,19 @@ const web3 = new Web3(rpc);
 export default class LockSelector extends Component {
     constructor(props) {
         super(props)
-        this.checkForConnection = this.checkForConnection.bind(this);
+        this.state = {value:0, end:0}
         this.unlockFTM = this.unlockFTM.bind(this);
         this.lockFTM = this.lockFTM.bind(this);
-        this.state = { dashboard : <div><p>You must be connected to access the lock dashboard.</p><br></br><button onClick={this.checkForConnection}>Retry</button></div>}
-        this.checkForConnection();
+        ethereum.request({ method: 'eth_requestAccounts' }).then((accounts)=> {
+            if (accounts.length == 0) {
+                alert("Please connect your metamask wallet.")
+            } else {
+            contract.methods.getLock(accounts[0]).call().then((data)=> {
+                this.setState({end : data.end});
+                this.setState({value: data.value})
+            });
+        }
+        });
     }
     connectWallet = async () => {
         if (window.ethereum) { //check if Metamask is installed
@@ -144,34 +152,27 @@ export default class LockSelector extends Component {
             }
         })
     }
-    
-    checkForConnection() {
-        ethereum.request({ method: 'eth_accounts' }).then((data) => {
-            if (data.length === 0) {
-                //Not connected
-            } else {
-                console.log('g')
-                contract.methods.getLock(data[0]).call().then((lockdata) => {
-                    console.log(lockdata)
-                    if (Number(lockdata.value) === 0) {
-                        
-                        this.setState({dashboard:<p>An automatic transaction should have been sent to your metamask wallet. Lock one 1 FTM for 14 days to have access to the platform.</p>})
-                        this.lockFTM();
-                        
-                    } else {
-                        this.setState({dashboard:<div><p><b>Your Lock Dashboard</b></p><p>Your lock of {lockdata.value} ends on {String(new Date(lockdata.end*1000))}</p><button onClick={this.unlockFTM}>Unlock</button></div>})
-                    }
-                })
-            }
-        })
-    }
+
     render() {
         return(
             <div>
                 <Navbar />
                 <div className='main'>
-                    <h1>Lock Dashboard</h1>
-                    {this.state.dashboard}
+                <div className="topHeading">
+          <div className="headerText">
+          <h1>Lock Dashboard</h1>
+          <br></br>
+          <p><b>Lock your fantom for access to the platform.</b></p>
+          </div>
+        </div>
+                    <div className="dashboard">
+                        <br></br>
+                        <p>Lock Value: {this.state.value / (10^18)}</p>
+                        <p>Lock End: {this.state.end}</p>
+                        <p><b>Actions</b></p>
+                        <button className="lockbutton" onClick={()=> this.unlockFTM()}>Unlock</button><button className="lockbutton" onClick={()=>this.lockFTM()}>Lock</button>
+
+                    </div>
                 </div>
             </div>
         )

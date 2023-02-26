@@ -25,3 +25,13 @@ p.big {
     overflow: auto;
   
   }
+  .topHeading {
+    width: 100%;
+    background-image: linear-gradient(80deg, #55aec9,  #1151c8);
+    height: 180px;
+    margin: 0px;
+    border-radius: 20px;
+  }
+  .headerText {
+    padding: 20px;
+  }

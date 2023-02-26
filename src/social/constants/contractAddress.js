@@ -1,2 +1,2 @@
-const contractAddress = "0xCE3178E3A95c905351616D42c18d0CCac2aC87A1"; //testnet only
+const contractAddress = "0x7b1C1B53d570e300895919Dc737541C004c95241"; //testnet only
 export default contractAddress; 

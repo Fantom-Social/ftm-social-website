@@ -34,7 +34,7 @@
     height: 40vh;
     background-color: #3D3D68;
     position: absolute;
-    box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     border-radius: 10px;
     top: 10%;
     z-index: 10;
@@ -50,7 +50,7 @@
     background-color: #3D3D68;
     color: white;
     width: 95%;
-    height: 30vh;
+    height: 25vh;
     display: block;
     border: none;
     font-size: 120%;
@@ -64,6 +64,10 @@
     background-color: #1969FF;
     color: white;
     box-shadow: rgb(0 0 0 / 20%) 0px -2px 0px inset;
+    float: right;
+    margin-right: 2vh;
+    margin-top: 3vh;
+    
   }
   ul #a {
     list-style-type: none;

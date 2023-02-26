@@ -26,6 +26,8 @@ export default class Main extends Component {
                         <li>Likes + Commenting (Full Version)</li>
                         <li>UI/UX Complete Change (Full Version)</li>
                         <li>Mobile Compatibility (Full Version)</li>
+                        <li>Multicall (Full Version)</li>
+                        <li>Clear Error Messages (Full Version)</li>
                         <li>Walletconnect, Trust Wallet Connection, etc (Q2)</li>
                         <li>Social Media Algorythim (Full Version)</li>
                         <li>Roadmap</li>

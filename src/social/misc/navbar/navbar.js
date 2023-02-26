@@ -12,7 +12,7 @@ const { ethereum } = window;
 class Navbar extends Component {
     constructor(props) {
         super(props);
-        this.state = { connectedButtonStatus: "Connect", function: this.connectWallet }
+        this.state = { connectedButtonStatus: "Connect", function: this.connectWallet, postData: "" }
         this.handleInput = this.handleInput.bind(this);
         this.sendPost = this.sendPost.bind(this);
     }
@@ -30,7 +30,6 @@ class Navbar extends Component {
         this.setState({ postData: e.target.value })
     }
     connectWallet = async () => {
-        contract.methods.lastCall().call().then((data) => { console.log(data) })
         if (window.ethereum) { //check if Metamask is installed
             try {
                 await window.ethereum.enable()
@@ -50,7 +49,6 @@ class Navbar extends Component {
     };
     sendPost() {
         this.connectWallet().then((data) => {
-            console.log(data)
             if (data == true) {
                 if (window.ethereum.networkVersion != 4002) {
                     try {
@@ -77,6 +75,7 @@ class Navbar extends Component {
 
                         }
                     }
+
                 } else {
                     ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
                         web3.eth.estimateGas({
@@ -104,9 +103,25 @@ class Navbar extends Component {
                                         this.directWindow()
                                         alert('Confirmed: ' + txHash)
                                     })
-                                    .catch((error) => { console.log(error) });
+                                    .catch((error) => {
+                                        contract.methods.getLock(accounts[0]).call().then((lock) => {
+                                            if (lock.value != (10**18)) {
+                                                alert("You must lock one fantom to post.")
+                                            } else {
+                                                alert("An unknown error occured. " + error)
+                                            }
+                                        })
+                                    });
                             })
-                            .catch((error) => alert(error))
+                            .catch((error) => {
+                                contract.methods.getLock(accounts[0]).call().then((lock) => {
+                                    if (lock.value != (10**18)) {
+                                        alert("You must lock one fantom to post.")
+                                    } else {
+                                        alert("An unknown error occured. " + error)
+                                    }
+                                })
+                            })
                     })
                 }
             }
@@ -124,16 +139,16 @@ class Navbar extends Component {
                         <a className='navbarLink' href={URL + 'app/lock'}>&nbsp;&nbsp;Lock</a>
                     </div>
                     <div className="navbarElement">
-                    <img src="/assets/images/icons/telescope.png" className="icon" width="35px" height="30px" alt="vault"></img>
-                    <a className='navbarLink' href={URL + 'app/explorer'}>&nbsp;&nbsp;Explore</a><br></br>
+                        <img src="/assets/images/icons/telescope.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                        <a className='navbarLink' href={URL + 'app/explorer'}>&nbsp;&nbsp;Explore</a><br></br>
                     </div>
                     <div className="navbarElement">
-                    <img src="/assets/images/icons/pencil.png" className="icon" width="35px" height="30px" alt="vault"></img>
-                    <a className='navbarLink' onClick={this.directWindow}>&nbsp;&nbsp;Create</a><br></br>
+                        <img src="/assets/images/icons/pencil.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                        <a className='navbarLink' onClick={this.directWindow}>&nbsp;&nbsp;Create</a><br></br>
                     </div>
                     <div className="navbarElement">
-                    <img src="/assets/images/icons/ballot.png" className="icon" width="35px" height="30px" alt="vault"></img>
-                    <a href={URL + 'app/dao'}><p className='navbarLink'>&nbsp;&nbsp;Governance</p></a>
+                        <img src="/assets/images/icons/ballot.png" className="icon" width="35px" height="30px" alt="vault"></img>
+                        <a href={URL + 'app/dao'}><p className='navbarLink'>&nbsp;&nbsp;Governance</p></a>
                     </div>
 
                 </div>

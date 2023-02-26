@@ -2,7 +2,10 @@
     margin-left: 15%;
     padding: 20px;
 }
-button {
+.lockbutton {
     background-color:  #1969ff;
     border: none;
+    padding: 5px;
+    border-radius: 25px;
+    margin: 5px;
 }

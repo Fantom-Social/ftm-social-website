@@ -34,8 +34,14 @@ export default class DAO extends Component {
             <div>
                 <Navbar />
                 <div className='main'>
-                    <h1>DAO</h1>
-                    <p>Vote and sumbit proposals to help keep the community safe and earn money.</p><br></br><br></br>
+                <div className="topHeading">
+          <div className="headerText">
+          <h1>Governance</h1>
+          <br></br>
+          <p><b>Keep the platform safe to earn money.</b></p>
+          </div>
+        </div>
+        <br></br><br></br>
                     {(this.state.proposals).map((item, i) => <div key={i}>
                         <h3><a href={URL + 'dao/proposals/' + item.id}>Proposal {item.id} - {this.isEnded(item.finished)}</a></h3>
                         <p><i>"{(this.state.posts[item.postId]).content}"</i> was posted on block {(this.state.posts[item.id]).timeCreated}. This proposal will end on {String(new Date(item.deadline * 1000).toLocaleString())}.</p>
