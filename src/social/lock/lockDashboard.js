@@ -15,16 +15,16 @@ export default class LockSelector extends Component {
         this.state = {value:0, end:0}
         this.unlockFTM = this.unlockFTM.bind(this);
         this.lockFTM = this.lockFTM.bind(this);
-        ethereum.request({ method: 'eth_requestAccounts' }).then((accounts)=> {
-            if (accounts.length == 0) {
-                alert("Please connect your metamask wallet.")
-            } else {
-            contract.methods.getLock(accounts[0]).call().then((data)=> {
-                this.setState({end : data.end});
-                this.setState({value: data.value})
+        if (typeof window.ethereum !== 'undefined') {
+            ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
+                contract.methods.getLock(accounts[0]).call().then((data)=> {
+                    this.setState({end : data.end});
+                    this.setState({value: data.value})
+            })
             });
+        } else {
+            alert("Please install metamask to your browser.")
         }
-        });
     }
     connectWallet = async () => {
         if (window.ethereum) { //check if Metamask is installed
