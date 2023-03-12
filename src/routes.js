@@ -7,6 +7,7 @@ import DAO from './social/dao/dao';
 import LockSelector from './social/lock/lockDashboard';
 import Proposal from './social/dao/proposal';
 import Main from './general/main/main';
+import CreatePost from './social/createPost/createPost';
 const LinkRoutes = () => {
     return (
         <div>
@@ -19,6 +20,7 @@ const LinkRoutes = () => {
                     <Route path="/app/lock" element={<LockSelector />} />
                     <Route path="/app/dao" element={<DAO />} />
                     <Route path="/app/dao/proposals/:id" element={<Proposal />} />
+                    <Route path="/app/new" element={<CreatePost />} />
                     <Route path="/app" element={<meta http-equiv="refresh" content={"0; URL=" + URL + "app/lock"} />}/>
                     <Route path="*" element={<meta http-equiv="refresh" content={"0; URL=" + URL} />}/>
                 </Routes>

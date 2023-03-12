@@ -1,31 +1,52 @@
+@media screen and (min-width: 680px) {
 .navbar {
     background-color: #3D3D68;
     box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
   
     height: 100%;
     margin: 0px;
-    width: 15%;
+    width: 8%;
     padding: 0px;
     position: fixed;
     overflow: auto;
+    z-index: 100;
   }
+  .navbarComponent {
+    margin-top: calc(13vh);
+    margin-bottom: calc(13vh);
+  }
+}
+@media screen and (max-width: 680px) {
+  .navbar {
+      background-color: #3D3D68;
+      box-shadow: 0 0 36px 0 rgb(0 0 0 / 30%);
+      margin: 0px;
+      height: calc(10% - 20px);
+      width: 100%;
+      bottom: 0;
+      padding: 0px;
+      position: fixed;
+      z-index: 100;
+      overflow: auto;
+      padding: calc(10px);
+    }
+    .navbarComponent {
+      display: inline;
+      margin: 10px;
+    }
+  }
+  
 
   button.connect {
     background-color: #1969FF;
     border: none;
     padding: 5px;
-    margin: 30px 0px 8px 8px;
     color: white;
     border-radius: 10px;
     box-shadow: rgb(0 0 0 / 20%) 0px -2px 0px inset;
     overflow: hidden;
     width: 80%;
     }
-  .navbarLink {
-    display: inline;
-    vertical-align:middle;
-    position: absolute;
-  }
   .navbarLink:hover {
     cursor: pointer;
   }
@@ -74,10 +95,6 @@
   }
   .icon {
     display: inline;
-  }
-  .navbarElement {
-    margin-top:20%;
-    margin-left: 10%;
   }
   @media screen and (max-width: 600px) {
     .sendPost {

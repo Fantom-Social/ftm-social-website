@@ -107,15 +107,16 @@ this.setState({posts : result})
     <a onClick={() => {unfollow(item.author)}}>Unfollow</a>
   </div>
 </div>
+<br></br>
                 <p className='big'><a className='postAddress' href={URL + "app/profile/" + item.author}>@{item.author}  · {item.timeCreated}</a></p>
+                <p className="breakword">{item.content}</p>
                 <br></br>
-                <p >{item.content}</p>
-              <br></br>
               <Line />
               <br></br>
             </div>)}<br></br>
             <a onClick={this.showMore}>Show More</a>
       </div>
+      <br></br><br></br><br></br><br></br>
       <div className='optionsBox'>
                 <h2><strong>Options</strong></h2><br></br>
                 <div style={{whiteSpace: 'nowrap'}}>

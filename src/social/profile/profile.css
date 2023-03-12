@@ -1,6 +1,14 @@
-.main {
-    margin-left: 15%;
-    padding: 20px;
+@media screen and (min-width: 680px) {
+  .main {
+      margin-left: 8%;
+      padding: 20px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .main {
+      margin-bottom: 10%;
+      padding: 20px;
+  }
 }
 p.big {
     font-size: 115%;
