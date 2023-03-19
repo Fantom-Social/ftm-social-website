@@ -3,6 +3,8 @@ import "./createPost.css"
 import post from "../misc/createPost";
 import URL from "../../constants/websiteURL";
 import Navbar from "../misc/navbar/navbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -39,6 +41,7 @@ export default class CreatePost extends Component {
                     <br></br>
                     <button onClick={this.sendPost} className="sendPostButton">Send Post</button>
                 </div>
+                <ToastContainer />
             </div>
         )
     }
