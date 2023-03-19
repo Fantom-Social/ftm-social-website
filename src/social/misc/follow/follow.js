@@ -15,8 +15,10 @@ export default async function follow(user) {
                     window.ethereum.request({
                         method: 'wallet_switchEthereumChain',
                         params: [{ chainId: web3.utils.toHex(4002) }]
-                    });
-                    followRequest(user)
+                    }).then(() => {
+                        followRequest(user)
+                    })
+
                 } catch (err) {
                     if (err.code === 4902) {
                         window.ethereum.request({
@@ -38,7 +40,8 @@ export default async function follow(user) {
                 followRequest(user)
             }
         } catch (error) {
-            alert("You need to connect to FTM Social to follow someone.")
+            console.log(error)
+            alert("You need to connect to FTM Social to follow someone. There may already be a request in your wallet.")
         }
     } else {
         alert("Please install metamask to your browser.")

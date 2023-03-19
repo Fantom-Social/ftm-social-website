@@ -1,67 +1,22 @@
-textarea.postArea {
-    background-color: #3D3D68;
-    color: white;
-    width: 95%;
-    border: none;
-    font-size: 120%;
-    border-radius: 0px;
-  }
-  @media screen and (max-width: 600px) {
-    .sendPost {
-        width: 100%;
-        left: 0;
-        height: 100%;
-        border-radius: 0;
-        box-shadow: none;
-        padding-left: 2.5%;
-        top: 0;
-    }
-    textarea.postArea {
-      height: 85vh;
-    }
-    }
-    @media screen and (min-width: 600px) {
-      .sendPost {
-          width: 40%;
-          left: 35%;
-          height: 40vh;
-          border-radius: 20px;
-          padding: 1%;
-          top: 10%;
-          box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-      }
-      textarea.postArea {
-        height: 25vh;
-      }
-      }
-      iframe {
-        width: 100%;
-        height: 100vh;
-        overflow:hidden;
-      }
-      #overlay {
-        position: fixed;
-        display: block;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0,0,0,0.5);
-        z-index: 2;
-      }
-      .sendPostButton {
-        width: 100px;
-        height: 20px;
-        border-radius: 10px;
-        border: none;
-        background-color: #1969FF;
-        color: white;
-        box-shadow: rgb(0 0 0 / 20%) 0px -2px 0px inset;
-        float: right;
-        position: absolute;
-        right: 8px;
-        bottom: 8px;
-        
-      }
+.createPost {
+  resize: none;
+  width: calc(100% - 20px);
+  border-style: solid;
+    border-width: 1.5px;
+    background-color: #f5f5f5;
+    border-color: rgb(214, 214, 214);
+    padding: 10px;
+    border-radius: 20px;
+    height: 50vh;
+}
+.createPost:focus {
+  outline: none;
+}
+.sendPostButton {
+  border-style: solid;
+  border-width: 1.5px;
+  background-color: #f5f5f5;
+  border-color: rgb(214, 214, 214);
+  padding: 5px;
+  border-radius: 20px;
+}

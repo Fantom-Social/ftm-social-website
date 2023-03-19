@@ -3,6 +3,7 @@ import contract from "../../constants/ABI";
 import Navbar from "../misc/navbar/navbar";
 import contractAddress from "../../constants/contractAddress";
 import rpc from "../../constants/rpcUrl";
+import URL from "../../constants/websiteURL";
 import "./dao.css"
 const Web3 = require('web3');
 const web3 = new Web3(rpc);
@@ -177,15 +178,34 @@ export default class ProposalComponent extends Component {
     render() {
         return(
             <div>
-                <Navbar />
-            <div className='main'>
+                
+                <div className="left">
+                <div className="introduction">
+                        <p>Welcome to the moderation dao!</p>
+                        <p><i>Mod Dao Highlights</i></p>
+                        <li>Moderate the platform to make the community a better place</li>
+                        <li>Earn tokens by moderating the platform</li>
+                        <li>Have your opinion be heard</li>
+                    </div>
+                    <br></br>
+                    <div className="navOptions">
+                        <a className="navOption topOption" href={URL}>Home</a>
+                        <a className="navOption" href={URL + "app/explorer"}>Explore</a>
+                        <a className="navOption" href={URL + "app/new"}>Create</a>
+                        <a className="navOption" href={URL + "app/lock"}>Lock</a>
+                        <a className="navOption bottomOption" href={URL + "app/dao"}>Moderate</a>
+                        <a className="navOption" href="#">Profile (Undeveloped)</a>
+                        <a className="navOption" href="#">Settings (Undeveloped)</a>
+                    </div>
+                </div>
+            <div className='center'>
                 <h1>Proposal Number {this.props.params.id}</h1>
                 <p>Deadline: {this.state.deadline}</p>
                 <p>Description: {this.state.desc}</p>
                 <p>Reporter: {this.state.reporter}</p>
                 <p>Content: "{this.state.postsData}"</p><br></br>
 
-                <h3>Does this post follow our terms of service?</h3><br></br>
+                <h3>Does this post follow your beliefs?</h3><br></br>
                 <code>
                 <h4>§ Posting</h4>
                 <p>1. Our platform is very open to any views and opinions and is very breif. Any opinions can be expressed on the platform as long as the opinions do not reflect censorship or attempt to make others unheard. Descussion of sensetive topics is completely allowed as long as it is not preformed.</p>

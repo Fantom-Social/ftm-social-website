@@ -1,2 +1,2 @@
-const URL = 'https://ftm-social-website.pages.dev/'
+const URL = 'http://localhost:3000/'
 export default URL;

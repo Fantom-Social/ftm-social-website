@@ -11,6 +11,7 @@ function capitalizeFirstLetter(string) {
 export default class Main extends Component {
     constructor(props) {
         super(props);
+        document.getElementsByTagName('body')[0].style.color = "white";
         this.state = {posts : 0, users : 0}
         contract.methods.getAddresses().call().then((addresses) => {
             this.setState({users:addresses.length})
@@ -29,7 +30,7 @@ export default class Main extends Component {
                             <br></br>
                             <p>Blockchain is more than finance. FTM Social pushes decentralized storage to its limits on the fantom network. Fantom powers high-speed and inexpensive transactions for this application.</p>
                             <br></br>
-                            <button className="enterAppButton"><a href={URL + "app"}>Enter App (Beta)</a></button>
+                            <button className="enterAppButton"><a href={URL + "app"} className="enterApp">Enter App (Beta)</a></button>
                         </center>
                     </div>
 
@@ -40,14 +41,13 @@ export default class Main extends Component {
                         <p className="blueText"><b>What is going to happen after beta?</b></p>
 
                         <li>Likes + Commenting (Full Version)</li>
-                        <li>UI/UX Complete Change (Full Version)</li>
+                        <li>Major UI Updates (Full Version)</li>
                         <li>Mobile Compatibility (Full Version)</li>
-                        <li>Multicall (Full Version)</li>
                         <li>Clear Error Messages (Full Version)</li>
-                        <li>Walletconnect, Trust Wallet Connection, etc (Q2)</li>
+                        <li>Alternative Wallet Connections (Q2)</li>
                         <li>Social Media Algorythim (Full Version)</li>
-                        <li>Improved DAO Proposal Page (Full Version)</li>
-                        <li>Improved DAO - User Report (Full Version)</li>
+                        <li>Improved DAO Proposal Page (More data) (Full Version)</li>
+                        <li>Improved DAO - User Reporting (Full Version)</li>
                         <li>Mainnet Launch (Full Version)</li>
                         <li>Roadmap (Q1-Q4)</li>
 

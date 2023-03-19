@@ -32,22 +32,34 @@ export default class DAO extends Component {
     render() {
         return (
             <div>
-                <Navbar />
-                <div className='main'>
-                <div className="topHeading">
-          <div className="headerText">
-          <h1>Governance</h1>
-          <br></br>
-          <p><b>Keep the platform safe to earn money.</b></p>
-          </div>
-        </div>
-        <br></br><br></br>
+                <div className="left">
+                    <div className="introduction">
+                        <p>Welcome to the moderation dao!</p>
+                        <p><i>Mod Dao Highlights</i></p>
+                        <li>Moderate the platform to make the community a better place</li>
+                        <li>Earn tokens by moderating the platform</li>
+                        <li>Have your opinion be heard</li>
+                    </div>
+                    <br></br>
+                    <div className="navOptions">
+                        <a className="navOption topOption" href={URL}>Home</a>
+                        <a className="navOption" href={URL + "app/explorer"}>Explore</a>
+                        <a className="navOption" href={URL + "app/new"}>Create</a>
+                        <a className="navOption" href={URL + "app/lock"}>Lock</a>
+                        <a className="navOption bottomOption" href={URL + "app/dao"}>Moderate</a>
+                        <a className="navOption" href="#">Profile (Undeveloped)</a>
+                        <a className="navOption" href="#">Settings (Undeveloped)</a>
+                    </div>
+                </div>
+                <div className='center'>
+                    <h1>Moderation Governance</h1>
                     {(this.state.proposals).map((item, i) => <div key={i}>
                         <h3><a href={URL + 'dao/proposals/' + item.id}>Proposal {item.id} - {this.isEnded(item.finished)}</a></h3>
                         <p><i>"{(this.state.posts[item.postId]).content}"</i> was posted on block {(this.state.posts[item.id]).timeCreated}. This proposal will end on {String(new Date(item.deadline * 1000).toLocaleString())}.</p>
                         <br></br>
                         <Line />
                     </div>)}
+                    <p>There is nothing left!</p>
                 </div>
             </div>
         )

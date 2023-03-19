@@ -9,6 +9,7 @@ import reportPost from "../misc/reportPost";
 import "./explorer.css";
 import Line from "../misc/line/line";
 import follow from "../misc/follow/follow";
+import URL from "../../constants/websiteURL";
 import unfollow from "../misc/follow/unfollow";
 const { ethereum } = window;
 const Web3 = require('web3');

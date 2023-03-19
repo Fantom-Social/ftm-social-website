@@ -1,4 +1,4 @@
-body {
+/*body {
   background-color: #32325D;
 }
 
@@ -109,4 +109,28 @@ pre {
 a {
   color: inherit;
   text-decoration: none;
+}*/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+i,
+button,
+li,
+textarea,
+ul {
+  font-family: 'Roboto', sans-serif;
 }
