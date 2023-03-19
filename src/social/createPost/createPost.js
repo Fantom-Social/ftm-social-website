@@ -2,6 +2,7 @@ import { Component } from "react";
 import "./createPost.css"
 import post from "../misc/createPost";
 import URL from "../../constants/websiteURL";
+import Navbar from "../misc/navbar/navbar";
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -28,15 +29,7 @@ export default class CreatePost extends Component {
                         <li>Store data in a decentralized manner</li>
                     </div>
                     <br></br>
-                    <div className="navOptions">
-                        <a className="navOption topOption" href={URL}>Home</a>
-                        <a className="navOption" href={URL + "app/explorer"}>Explore</a>
-                        <a className="navOption" href={URL + "app/new"}>Create</a>
-                        <a className="navOption" href={URL + "app/lock"}>Lock</a>
-                        <a className="navOption bottomOption" href={URL + "app/dao"}>Moderate</a>
-                        <a className="navOption" href="#">Profile (Undeveloped)</a>
-                        <a className="navOption" href="#">Settings (Undeveloped)</a>
-                    </div>
+                    <Navbar />
                 </div>
                 <div className="center">
                     <h1>Create Post</h1>
